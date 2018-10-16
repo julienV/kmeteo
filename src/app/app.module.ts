@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ApiMeteoProvider } from '../providers/api-meteo/api-meteo';
+import { CityListProvider } from '../providers/city-list/city-list';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ApiMeteoProvider } from '../providers/api-meteo/api-meteo';
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ApiMeteoProvider
+    ApiMeteoProvider,
+    CityListProvider
   ]
 })
 export class AppModule {}

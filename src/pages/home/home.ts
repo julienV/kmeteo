@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ApiMeteoProvider } from '../../providers/api-meteo/api-meteo';
 import { City } from '../../app/City';
+import { ModalController } from 'ionic-angular';
+import { FavoritePage } from '../favorite/favorite';
 
 @Component({
   selector: 'page-home',
@@ -11,7 +13,10 @@ import { City } from '../../app/City';
 export class HomePage {
   locationMeteo: City;
 
-  constructor(public navCtrl: NavController, private geolocation: Geolocation, public apiMeteo: ApiMeteoProvider) {
+  constructor(
+    public navCtrl: NavController, public geolocation: Geolocation, public apiMeteo: ApiMeteoProvider,
+    public modalCtrl: ModalController
+    ) {
   }
 
   ionViewDidLoad() {
@@ -27,5 +32,10 @@ export class HomePage {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+  }
+
+  addFavorite() {
+    let favoriteModal = this.modalCtrl.create('FavoritePage');
+    favoriteModal.present();
   }
 }

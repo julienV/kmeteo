@@ -3,15 +3,21 @@
     <ion-title>
       Favorites
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addFavorite()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="locationMeteo">
-      <ion-item>
+  <ion-list>
+      <ion-item-divider *ngIf="locationMeteo">My position</ion-item-divider>
+      <ion-item *ngIf="locationMeteo">
           <h2>{{locationMeteo.name}}</h2>
           <img src="{{'http://openweathermap.org/img/w/' + locationMeteo.weather[0].icon + '.png'}}" [title]="locationMeteo.weather[0].main"/>
           <p>{{locationMeteo.weather[0].main}}</p>
       </ion-item>
-  </div>
+  </ion-list>
 </ion-content>

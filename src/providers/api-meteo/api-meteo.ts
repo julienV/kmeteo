@@ -13,8 +13,8 @@ export class ApiMeteoProvider {
   apiUrl = 'http://localhost:3000';
 
   constructor(public http: HttpClient) {
-  }
-
+  };  
+  
   getCityFromPosition(position: {lat:number, lng: number}) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl+'/latlng').subscribe(data => {
