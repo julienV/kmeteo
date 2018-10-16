@@ -1,5 +1,7 @@
 {
   "name": "kMeteo",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
