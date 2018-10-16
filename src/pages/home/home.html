@@ -7,5 +7,11 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="position">pos: {{position.lat}} / {{position.lng}}</div>
+  <div *ngIf="locationMeteo">
+      <ion-item>
+          <h2>{{locationMeteo.name}}</h2>
+          <img src="{{'http://openweathermap.org/img/w/' + locationMeteo.weather[0].icon + '.png'}}" [title]="locationMeteo.weather[0].main"/>
+          <p>{{locationMeteo.weather[0].main}}</p>
+      </ion-item>
+  </div>
 </ion-content>
