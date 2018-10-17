@@ -19,4 +19,7 @@ export class CityRowComponent {
   constructor() {
   }
 
+  temp(value: number) {
+    return Math.round(value - 273.15);
+  }
 }

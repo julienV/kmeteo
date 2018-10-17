@@ -1,4 +1,16 @@
 
-<h2>{{city.name}}</h2>
-<img src="{{'http://openweathermap.org/img/w/' + city.weather[0].icon + '.png'}}" [title]="city.weather[0].main"/>
-<p>{{city.weather[0].main}}</p>
+<ion-row nowrap align-items-center>
+  <ion-col class="temp">
+    {{temp(city.main.temp)}}°C
+  </ion-col>
+  <ion-col>
+    <img src="{{'http://openweathermap.org/img/w/' + city.weather[0].icon + '.png'}}" [title]="city.weather[0].main"/>
+  </ion-col>
+  <ion-col col-9>
+    <div class="city-name">{{city.name}} - {{city.sys.country}}</div>
+    <div class="weather-desc">{{city.weather[0].description}}</div>
+  </ion-col>
+  <ion-col>
+    <ion-icon name="information-circle"></ion-icon>
+  </ion-col>      
+</ion-row>

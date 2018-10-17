@@ -12,15 +12,17 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-      <ion-item-divider *ngIf="locationMeteo">Ma position</ion-item-divider>
-      <ion-item *ngIf="locationMeteo">
-          <city-row [city]="locationMeteo"></city-row>
-      </ion-item>
+  <ion-grid *ngIf="locationMeteo">
+      <ion-row class="section-title">
+        <ion-col>Ma position</ion-col>
+      </ion-row>
+      <city-row [city]="locationMeteo"></city-row>
+  </ion-grid>
 
-      <ion-item-divider *ngIf="favoritesMeteo.length > 0">Mes Favoris</ion-item-divider>
-      <ion-item *ngFor="let favorite of favoritesMeteo">
-          <city-row [city]="favorite"></city-row>
-      </ion-item>
-  </ion-list>
+  <ion-grid *ngIf="favoritesMeteo.length > 0">
+      <ion-row  class="section-title">
+        <ion-col>Mes Favoris</ion-col>
+      </ion-row>
+      <city-row *ngFor="let favorite of favoritesMeteo" [city]="favorite"></city-row>
+  </ion-grid>
 </ion-content>
