@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content padding>
-  <input #box placeholder="Start typing..." (keyup)="updateList(box.value)"/>
+  <ion-input #box type="text" placeholder="Start typing..." (keyup)="updateList(box.value)"></ion-input>
 
   <ion-list *ngIf="matches.length > 0">
     <button ion-item *ngFor="let match of matches" (click)="addFavorite(match.id)">

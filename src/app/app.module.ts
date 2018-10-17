@@ -11,11 +11,13 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ApiMeteoProvider } from '../providers/api-meteo/api-meteo';
 import { CityListProvider } from '../providers/city-list/city-list';
+import { CityRowComponent } from '../components/city-row/city-row';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    CityRowComponent
   ],
   imports: [
     BrowserModule,
