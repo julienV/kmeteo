@@ -17,7 +17,9 @@ import 'rxjs/add/observable/forkJoin';
 */
 @Injectable()
 export class ApiMeteoProvider {
-  apiUrl = 'http://localhost:3000';
+  localApiUrl = 'http://localhost:3000';
+  apiUrl = 'http://api.openweathermap.org/data/2.5/'
+  key = "&APPID=3309d28ad2c28b1a00c576b89708436f"
 
   constructor(public http: HttpClient, public storage: Storage, public geolocation: Geolocation) {
   };  
@@ -25,7 +27,9 @@ export class ApiMeteoProvider {
   getCityFromPosition(): Observable<City> {
     return Observable.fromPromise(this.geolocation.getCurrentPosition())
       .mergeMap((resp) => {
-        return this.http.get<City>(this.apiUrl + '/latlng').map((data) => new City(data));
+        return this.http.get<City>(
+          this.apiUrl + 'weather?lat=' + resp.coords.latitude + '&lon=' + resp.coords.longitude + this.key)
+          .map((data) => new City(data));
       });
   }
 
@@ -37,7 +41,8 @@ export class ApiMeteoProvider {
         }
         const observables = [];
         for (let i = 0; i < resp.length; i++) {
-          observables.push(this.http.get<City>(this.apiUrl + '/city/0').map((data) => new City(data)));
+          observables.push(this.http.get<City>(this.apiUrl + 'weather?id=' + resp[i] + this.key)
+            .map((data) => new City(data)));
         }
 
         return Observable.forkJoin(observables);
@@ -45,6 +50,6 @@ export class ApiMeteoProvider {
   }
 
   getCityForecast(cityId): Observable<any> {
-    return this.http.get(this.apiUrl + '/forecast/0');
+    return this.http.get(this.apiUrl + '/forecast?id=' + cityId + this.key);
   }
 }

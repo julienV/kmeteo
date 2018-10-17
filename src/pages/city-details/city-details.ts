@@ -19,8 +19,12 @@ export class CityDetailsPage {
     this.city = navParams.get('city');
     this.isFavorite = navParams.get('isFavorite');
 
-    this.tomorrow = new Date();
-    this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+    var q = new Date();
+    var m = q.getMonth();
+    var d = q.getDate() + 1;
+    var y = q.getFullYear();
+
+    this.tomorrow = new Date(y,m,d);
   }
 
   ionViewDidLoad() {
@@ -33,7 +37,7 @@ export class CityDetailsPage {
     return this.forecast.list.filter((data) => {
       const date = new Date(data.dt_txt);
       
-      return data.dt_txt.indexOf('09:00:00') > -1 && date > this.tomorrow;
+      return data.dt_txt.indexOf('12:00:00') > -1 && date >= this.tomorrow;
     });
   }
 
