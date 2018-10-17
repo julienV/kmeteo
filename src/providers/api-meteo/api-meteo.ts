@@ -6,6 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
 
 /*
@@ -24,7 +25,7 @@ export class ApiMeteoProvider {
   getCityFromPosition(): Observable<City> {
     return Observable.fromPromise(this.geolocation.getCurrentPosition())
       .mergeMap((resp) => {
-        return this.http.get<City>(this.apiUrl + '/latlng')
+        return this.http.get<City>(this.apiUrl + '/latlng').map((data) => new City(data));
       });
   }
 
@@ -36,10 +37,14 @@ export class ApiMeteoProvider {
         }
         const observables = [];
         for (let i = 0; i < resp.length; i++) {
-          observables.push(this.http.get<City>(this.apiUrl + '/city/0'));
+          observables.push(this.http.get<City>(this.apiUrl + '/city/0').map((data) => new City(data)));
         }
 
         return Observable.forkJoin(observables);
       });
+  }
+
+  getCityForecast(cityId): Observable<any> {
+    return this.http.get(this.apiUrl + '/forecast/0');
   }
 }

@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>{{city.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="current-weather" text-center>
+    <div class="desc" text-center>
+      {{city.weather[0].description}}
+    </div>
+    <div class="temperature" text-center>
+      {{city.main.temp|celcius}}°C
+    </div>
+  </div>
+  <ion-grid *ngIf="forecast">
+    <ion-row *ngFor="let row of filteredResults()" nowrap align-items-center>
+      <ion-col>{{row.dt_txt|date:"EEEE"}}</ion-col>
+      <ion-col><img [src] ="row.weather[0].icon|weatherIcon" [title]="row.weather[0].description"/></ion-col>
+      <ion-col>{{row.main.temp|celcius}}°C</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { City } from '../../app/City';
+import { NavController } from 'ionic-angular';
+import { CityDetailsPage } from '../../pages/city-details/city-details';
 
 /**
  * Generated class for the CityRowComponent component.
@@ -16,10 +18,14 @@ export class CityRowComponent {
   @Input()
   city: City;
 
-  constructor() {
+  constructor(public navCtrl: NavController) {
   }
 
-  temp(value: number) {
+  temp(value: number): number {
     return Math.round(value - 273.15);
+  }
+
+  navToDetails() {
+    this.navCtrl.push(CityDetailsPage, {city: this.city});
   }
 }

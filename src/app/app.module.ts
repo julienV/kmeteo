@@ -9,26 +9,36 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { CityDetailsPage } from '../pages/city-details/city-details';
+
 import { ApiMeteoProvider } from '../providers/api-meteo/api-meteo';
 import { CityListProvider } from '../providers/city-list/city-list';
+
 import { CityRowComponent } from '../components/city-row/city-row';
+
+import { PipesModule } from '../pipes/pipes.module';
+import { CelciusPipe } from '../pipes/celcius/celcius';
+import { WeatherIconPipe } from '../pipes/weather-icon/weather-icon';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    CityRowComponent
+    CityRowComponent,
+    CityDetailsPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    CityDetailsPage
   ],
   providers: [
     StatusBar,
