@@ -1,3 +1,8 @@
 page-favorite {
-
+    ion-content {
+        @include linear-gradient(top,$very-blue);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+      }
 }

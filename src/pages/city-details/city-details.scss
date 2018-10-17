@@ -1,3 +1,29 @@
 page-city-details {
+    ion-content {
+        @include linear-gradient(top,$reef);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
 
+        .current-weather {
+            padding: 10px 0;
+
+            .desc {
+                color: color($colors, 'light');
+            }
+    
+            .temperature {
+                color: color($colors, 'light');
+                font-size:6em;
+            }
+        }
+
+        ion-row {
+            @include linear-gradient(top,$inbox);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            color: color($colors, 'light');
+        }
+      }
 }

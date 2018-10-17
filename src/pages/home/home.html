@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar navbar color="primary">
     <ion-title text-center>
       kMétéo
     </ion-title>
@@ -11,16 +11,16 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-grid *ngIf="locationMeteo">
-      <ion-row class="section-title">
+<ion-content>
+  <ion-grid *ngIf="locationMeteo" no-padding>
+      <ion-row class="section-title" align-items-center	>
         <ion-col>Ma position</ion-col>
       </ion-row>
       <city-row [city]="locationMeteo"></city-row>
   </ion-grid>
 
-  <ion-grid *ngIf="favoritesMeteo.length > 0">
-      <ion-row  class="section-title">
+  <ion-grid *ngIf="favoritesMeteo.length > 0" no-padding>
+      <ion-row  class="section-title" align-items-center	>
         <ion-col>Mes Favoris</ion-col>
       </ion-row>
       <city-row *ngFor="let favorite of favoritesMeteo" [city]="favorite" [isFavorite]="true"></city-row>

@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar navbar color="primary">
     <ion-title>Add a Favorite</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="closeModal()">
@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-input #box type="text" placeholder="Start typing..." (keyup)="updateList(box.value)"></ion-input>
+  <ion-searchbar #box type="search" placeholder="Start typing..." (keyup)="updateList(box.value)"></ion-searchbar>
 
   <ion-list *ngIf="matches.length > 0">
     <button ion-item *ngFor="let match of matches" (click)="addFavorite(match.id)">

@@ -1,3 +1,13 @@
 city-row {
-
+    .temp, .city-name {
+        color: color($colors, 'secondary');
+        font-weight:bold;
+    }
+    .weather-desc {
+        color: color($colors, 'light');
+    }
+    ion-icon {
+        font-size:2em;
+        color: color($colors, 'light');
+    }
 }

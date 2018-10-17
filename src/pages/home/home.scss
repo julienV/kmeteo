@@ -1,3 +1,25 @@
 page-home {
-
+    ion-content {
+        @include linear-gradient(top,$very-blue);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+      }
+    ion-row.section-title {
+        height: 3em;
+        background: darkblue;
+        color: white;
+        @include linear-gradient(top,$clear-sky);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        padding-left:2em;
+        font-weight:bold;
+    }
+    ion-row {
+        @include linear-gradient(top,$inbox);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+    }
 }
