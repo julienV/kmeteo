@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { City } from '../../app/City';
 import { ApiMeteoProvider } from '../../providers/api-meteo/api-meteo';
 import { Storage } from '@ionic/storage';
-import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'page-city-details',
@@ -19,8 +18,11 @@ export class CityDetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public api: ApiMeteoProvider, public storage: Storage) {
+    // Coming from search city, we don't have the City weather object yet, just id and name
     this.cityId = navParams.get('cityId');
     this.name = navParams.get('name');
+
+    // Coming from home, we already have the weather
     this.city = navParams.get('city');
 
     var q = new Date();
@@ -33,25 +35,33 @@ export class CityDetailsPage {
 
   ionViewDidLoad() {
     if (!this.city) {
+      // Get from id, coming from add favorite
       this.api.getCityWeather(this.cityId).subscribe(data => {
         this.city = data;
         this.name = data.name;
       })
     }
     else {
+      // Get those info from city
       this.cityId = this.city.id;
       this.name = this.city.name;
     }
-
+    console.dir(this.city);
+console.log(this.cityId);
+    // Get forecast
     this.api.getCityForecast(this.cityId).subscribe(data => {
       this.forecast = data;
     })
 
+    // Check if is in favorites
     this.storage.get('favorites').then((data) => {
       this.isFavorite = data.indexOf(this.cityId) > -1;
     });
   }
 
+  /**
+   * forecast query returns weather for each 3h, so just take the weather at 12:00 for the day
+   */
   filteredResults() {
     return this.forecast.list.filter((data) => {
       const date = new Date(data.dt_txt);
@@ -60,6 +70,9 @@ export class CityDetailsPage {
     });
   }
 
+  /**
+   * Delete from favorites
+   */
   delete() {
     this.storage.get('favorites').then((data) => {
       data.splice(data.indexOf(this.cityId), 1);
@@ -69,6 +82,9 @@ export class CityDetailsPage {
     });
   }
 
+  /**
+   * add to favorites
+   */
   add() {
     this.storage.get('favorites').then((data: number[]) => {
       if (!data) {

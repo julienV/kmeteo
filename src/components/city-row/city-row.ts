@@ -18,17 +18,13 @@ export class CityRowComponent {
   @Input()
   city: City;
 
-  @Input()
-  isFavorite = false;
-
   constructor(public navCtrl: NavController) {
   }
 
-  temp(value: number): number {
-    return Math.round(value - 273.15);
-  }
-
+  /**
+   * Navigate to detail view
+   */
   navToDetails() {
-    this.navCtrl.push(CityDetailsPage, {city: this.city, isFavorite: this.isFavorite});
+    this.navCtrl.push(CityDetailsPage, {city: this.city});
   }
 }

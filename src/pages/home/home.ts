@@ -28,18 +28,27 @@ export class HomePage {
     this.getFavoritesMeteo();
   }
 
+  /**
+   * Get weather from current position
+   */
   getLocalMeteo() {
     this.apiMeteo.getCityFromPosition().subscribe((data: City) => {
       this.locationMeteo = data;
     });
   }
 
+  /**
+   * Get weather for favorites
+   */
   getFavoritesMeteo() {
     this.apiMeteo.getFavoritesMeteo().subscribe((data: City[]) => {
         this.favoritesMeteo = data;
     });
   }
 
+  /**
+   * Open add favorite page
+   */
   addFavorite() {
     let favoriteModal = this.modalCtrl.create('FavoritePage');
 
@@ -50,18 +59,5 @@ export class HomePage {
     });
 
     favoriteModal.present();
-  }
-
-  removeFavorite(cityId: number) {
-    let favorites = this.storage.get('favorites').then((data: number[]) => {
-      if (!data) {
-        return;
-      }
-
-      data.splice(data.indexOf(cityId), 1);
-      this.storage.set('favorites', data);
-
-      this.getFavoritesMeteo();
-    });
   }
 }

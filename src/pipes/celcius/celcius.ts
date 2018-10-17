@@ -10,7 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CelciusPipe implements PipeTransform {
   /**
-   * Transform Kelvin temp to rounded Celsius
+   * Transform Kelvin temperature to rounded Celsius
    */
   transform(value: number) {
     return Math.round(value - 273.15);

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, App } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { CityListProvider } from '../../providers/city-list/city-list';
 import { CityDetailsPage } from '../city-details/city-details';
 
@@ -27,17 +26,30 @@ export class FavoritePage {
     this.matches = [];
   }
 
+  /**
+   * Get matching cities from local json file
+   * 
+   * @param str 
+   */
   updateList(str: string) {
     if (str.length > 1) {
       this.matches = this.cityList.search(str);
     }
   }
 
+  /**
+   * Go to details page
+   * 
+   * @param cityId 
+   */
   addFavorite(cityId: number) {
     this.viewCtrl.dismiss();
     this.appCtrl.getRootNav().push(CityDetailsPage, {cityId});
   }
 
+  /**
+   * Close modal without action
+   */
   closeModal() {
     this.viewCtrl.dismiss();
   }

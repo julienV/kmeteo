@@ -24,6 +24,9 @@ export class ApiMeteoProvider {
   constructor(public http: HttpClient, public storage: Storage, public geolocation: Geolocation) {
   };  
 
+  /**
+   * Get position, then weather from position
+   */
   getCityFromPosition(): Observable<City> {
     return Observable.fromPromise(this.geolocation.getCurrentPosition())
       .mergeMap((resp) => {
@@ -33,11 +36,19 @@ export class ApiMeteoProvider {
       });
   }
 
+  /**
+   * Get city weather from id
+   * 
+   * @param cityId 
+   */
   getCityWeather(cityId): Observable<City> {
     return this.http.get<City>(this.apiUrl + 'weather?id=' + cityId + this.key)
       .map((data) => new City(data));
   }
 
+  /**
+   * Get weather for favorites
+   */
   getFavoritesMeteo(): Observable<City[]> {
     return Observable.fromPromise(this.storage.get('favorites'))
       .mergeMap((resp) => {
@@ -53,7 +64,12 @@ export class ApiMeteoProvider {
       });
   }
 
+  /**
+   * Get city forecast by id
+   * 
+   * @param cityId 
+   */
   getCityForecast(cityId): Observable<any> {
-    return this.http.get(this.apiUrl + '/forecast?id=' + cityId + this.key);
+    return this.http.get(this.apiUrl + 'forecast?id=' + cityId + this.key);
   }
 }
