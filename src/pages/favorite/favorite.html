@@ -8,10 +8,14 @@
 
   <ion-navbar>
     <ion-title>Add a Favorite</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
-
 
 <ion-content padding>
   <input #box placeholder="Start typing..." (keyup)="updateList(box.value)"/>

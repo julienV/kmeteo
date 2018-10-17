@@ -19,5 +19,12 @@
           <img src="{{'http://openweathermap.org/img/w/' + locationMeteo.weather[0].icon + '.png'}}" [title]="locationMeteo.weather[0].main"/>
           <p>{{locationMeteo.weather[0].main}}</p>
       </ion-item>
+
+      <ion-item-divider *ngIf="favoritesMeteo.length > 0">Favorites</ion-item-divider>
+      <ion-item *ngFor="let favorite of favoritesMeteo">
+          <h2>{{favorite.name}}</h2>
+          <img src="{{'http://openweathermap.org/img/w/' + favorite.weather[0].icon + '.png'}}" [title]="favorite.weather[0].main"/>
+          <p>{{favorite.weather[0].main}}</p>
+      </ion-item>
   </ion-list>
 </ion-content>

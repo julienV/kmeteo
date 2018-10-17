@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { CityListProvider } from '../../providers/city-list/city-list';
 
 /**
@@ -19,7 +20,7 @@ export class FavoritePage {
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-    public cityList: CityListProvider
+    public cityList: CityListProvider, public storage: Storage
     ) {
     this.matches = [];
   }
@@ -31,6 +32,21 @@ export class FavoritePage {
   }
 
   addFavorite(cityId: number) {
+    let favorites = this.storage.get('favorites').then((data: number[]) => {
+      if (!data) {
+        data = [];
+      }
+
+      if (data.indexOf(cityId) == -1) {
+        data.push(cityId);
+        this.storage.set('favorites', data);
+      }
+    });
+
     this.viewCtrl.dismiss(cityId);
+  }
+
+  closeModal() {
+    this.viewCtrl.dismiss();
   }
 }
