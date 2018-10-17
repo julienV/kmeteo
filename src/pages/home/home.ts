@@ -22,6 +22,9 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.getLocalMeteo();
+  }
+
+  ionViewDidEnter() {
     this.getFavoritesMeteo();
   }
 

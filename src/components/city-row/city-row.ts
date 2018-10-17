@@ -18,6 +18,9 @@ export class CityRowComponent {
   @Input()
   city: City;
 
+  @Input()
+  isFavorite = false;
+
   constructor(public navCtrl: NavController) {
   }
 
@@ -26,6 +29,6 @@ export class CityRowComponent {
   }
 
   navToDetails() {
-    this.navCtrl.push(CityDetailsPage, {city: this.city});
+    this.navCtrl.push(CityDetailsPage, {city: this.city, isFavorite: this.isFavorite});
   }
 }

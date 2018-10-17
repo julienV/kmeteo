@@ -2,6 +2,12 @@
 
   <ion-navbar>
     <ion-title text-center>{{city.name}}</ion-title>
+    <ion-buttons *ngIf="isFavorite" end>
+      <button ion-button icon-only (click)="delete()">
+        <ion-icon name="star"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>

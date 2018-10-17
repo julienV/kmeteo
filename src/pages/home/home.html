@@ -23,6 +23,6 @@
       <ion-row  class="section-title">
         <ion-col>Mes Favoris</ion-col>
       </ion-row>
-      <city-row *ngFor="let favorite of favoritesMeteo" [city]="favorite"></city-row>
+      <city-row *ngFor="let favorite of favoritesMeteo" [city]="favorite" [isFavorite]="true"></city-row>
   </ion-grid>
 </ion-content>

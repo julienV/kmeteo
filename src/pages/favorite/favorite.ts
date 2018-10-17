@@ -32,7 +32,7 @@ export class FavoritePage {
   }
 
   addFavorite(cityId: number) {
-    let favorites = this.storage.get('favorites').then((data: number[]) => {
+    this.storage.get('favorites').then((data: number[]) => {
       if (!data) {
         data = [];
       }
