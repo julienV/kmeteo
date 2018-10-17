@@ -1,12 +1,12 @@
 <ion-header>
 
   <ion-navbar navbar color="primary">
-    <ion-title text-center>{{city.name}}</ion-title>
+    <ion-title text-center *ngIf="city">{{city.name}}</ion-title>
     <ion-buttons end>
       <button *ngIf="isFavorite" ion-button icon-only (click)="delete()">
         <ion-icon name="star"></ion-icon>
       </button>
-      <button *ngIf="!isFavorite" ion-button icon-only>
+      <button *ngIf="!isFavorite" ion-button icon-only (click)="add()">
         <ion-icon name="star-outline"></ion-icon>
       </button>
     </ion-buttons>
@@ -16,7 +16,7 @@
 
 
 <ion-content>
-  <div class="current-weather" text-center>
+  <div class="current-weather" text-center *ngIf="city">
       <div class="icon" text-center>
           <img [src] ="city.weather[0].icon|weatherIcon" [title]="city.weather[0].description"/>
       </div>

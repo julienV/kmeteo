@@ -33,6 +33,11 @@ export class ApiMeteoProvider {
       });
   }
 
+  getCityWeather(cityId): Observable<City> {
+    return this.http.get<City>(this.apiUrl + 'weather?id=' + cityId + this.key)
+      .map((data) => new City(data));
+  }
+
   getFavoritesMeteo(): Observable<City[]> {
     return Observable.fromPromise(this.storage.get('favorites'))
       .mergeMap((resp) => {
@@ -41,8 +46,7 @@ export class ApiMeteoProvider {
         }
         const observables = [];
         for (let i = 0; i < resp.length; i++) {
-          observables.push(this.http.get<City>(this.apiUrl + 'weather?id=' + resp[i] + this.key)
-            .map((data) => new City(data)));
+          observables.push(this.getCityWeather(resp[i]));
         }
 
         return Observable.forkJoin(observables);

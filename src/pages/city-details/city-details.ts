@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { City } from '../../app/City';
 import { ApiMeteoProvider } from '../../providers/api-meteo/api-meteo';
 import { Storage } from '@ionic/storage';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'page-city-details',
@@ -10,14 +11,17 @@ import { Storage } from '@ionic/storage';
 })
 export class CityDetailsPage {
   city: City;
+  cityId: number;
+  name: string;
   forecast: any;
   tomorrow: Date;
   isFavorite = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public api: ApiMeteoProvider, public storage: Storage) {
+    this.cityId = navParams.get('cityId');
+    this.name = navParams.get('name');
     this.city = navParams.get('city');
-    this.isFavorite = navParams.get('isFavorite');
 
     var q = new Date();
     var m = q.getMonth();
@@ -28,9 +32,24 @@ export class CityDetailsPage {
   }
 
   ionViewDidLoad() {
-    this.api.getCityForecast(this.city.id).subscribe(data => {
+    if (!this.city) {
+      this.api.getCityWeather(this.cityId).subscribe(data => {
+        this.city = data;
+        this.name = data.name;
+      })
+    }
+    else {
+      this.cityId = this.city.id;
+      this.name = this.city.name;
+    }
+
+    this.api.getCityForecast(this.cityId).subscribe(data => {
       this.forecast = data;
     })
+
+    this.storage.get('favorites').then((data) => {
+      this.isFavorite = data.indexOf(this.cityId) > -1;
+    });
   }
 
   filteredResults() {
@@ -43,9 +62,25 @@ export class CityDetailsPage {
 
   delete() {
     this.storage.get('favorites').then((data) => {
-      data.splice(data.indexOf(this.city.id), 1);
-      this.storage.set('favorites', data);
-    });  
-    this.navCtrl.pop(); 
+      data.splice(data.indexOf(this.cityId), 1);
+      this.storage.set('favorites', data).then(data => {
+        this.isFavorite = false;
+      });
+    });
+  }
+
+  add() {
+    this.storage.get('favorites').then((data: number[]) => {
+      if (!data) {
+        data = [];
+      }
+
+      if (data.indexOf(this.cityId) == -1) {
+        data.push(this.cityId);
+        this.storage.set('favorites', data).then(data => {
+          this.isFavorite = true;
+        });
+      }
+    });
   }
 }

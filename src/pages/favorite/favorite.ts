@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CityListProvider } from '../../providers/city-list/city-list';
+import { CityDetailsPage } from '../city-details/city-details';
 
 /**
  * Generated class for the FavoritePage page.
@@ -20,7 +21,8 @@ export class FavoritePage {
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-    public cityList: CityListProvider, public storage: Storage
+    public cityList: CityListProvider,
+    public appCtrl: App
     ) {
     this.matches = [];
   }
@@ -32,18 +34,8 @@ export class FavoritePage {
   }
 
   addFavorite(cityId: number) {
-    this.storage.get('favorites').then((data: number[]) => {
-      if (!data) {
-        data = [];
-      }
-
-      if (data.indexOf(cityId) == -1) {
-        data.push(cityId);
-        this.storage.set('favorites', data);
-      }
-    });
-
-    this.viewCtrl.dismiss(cityId);
+    this.viewCtrl.dismiss();
+    this.appCtrl.getRootNav().push(CityDetailsPage, {cityId});
   }
 
   closeModal() {
