@@ -17,8 +17,6 @@ import { CityListProvider } from '../providers/city-list/city-list';
 import { CityRowComponent } from '../components/city-row/city-row';
 
 import { PipesModule } from '../pipes/pipes.module';
-import { CelciusPipe } from '../pipes/celcius/celcius';
-import { WeatherIconPipe } from '../pipes/weather-icon/weather-icon';
 
 @NgModule({
   declarations: [

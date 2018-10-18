@@ -17,7 +17,6 @@ import 'rxjs/add/observable/forkJoin';
 */
 @Injectable()
 export class ApiMeteoProvider {
-  localApiUrl = 'http://localhost:3000';
   apiUrl = 'http://api.openweathermap.org/data/2.5/'
   key = "&APPID=3309d28ad2c28b1a00c576b89708436f"
 
@@ -52,12 +51,13 @@ export class ApiMeteoProvider {
   getFavoritesMeteo(): Observable<City[]> {
     return Observable.fromPromise(this.storage.get('favorites'))
       .mergeMap((resp) => {
-        if (!resp) {
-          throw 0;  
-        }
         const observables = [];
-        for (let i = 0; i < resp.length; i++) {
-          observables.push(this.getCityWeather(resp[i]));
+        
+        if (resp)
+        {
+          for (let i = 0; i < resp.length; i++) {
+            observables.push(this.getCityWeather(resp[i]));
+          }
         }
 
         return Observable.forkJoin(observables);

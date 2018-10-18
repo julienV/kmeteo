@@ -46,8 +46,7 @@ export class CityDetailsPage {
       this.cityId = this.city.id;
       this.name = this.city.name;
     }
-    console.dir(this.city);
-console.log(this.cityId);
+    
     // Get forecast
     this.api.getCityForecast(this.cityId).subscribe(data => {
       this.forecast = data;

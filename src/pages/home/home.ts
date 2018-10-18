@@ -41,6 +41,7 @@ export class HomePage {
    * Get weather for favorites
    */
   getFavoritesMeteo() {
+    this.favoritesMeteo = [];
     this.apiMeteo.getFavoritesMeteo().subscribe((data: City[]) => {
         this.favoritesMeteo = data;
     });

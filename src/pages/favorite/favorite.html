@@ -21,7 +21,7 @@
   <ion-searchbar #box type="search" placeholder="Start typing..." (keyup)="updateList(box.value)"></ion-searchbar>
 
   <ion-list *ngIf="matches.length > 0">
-    <button ion-item *ngFor="let match of matches" (click)="addFavorite(match.id)">
+    <button ion-item *ngFor="let match of matches" (click)="addFavorite(match.id, match.name)">
       {{match.name}} ({{match.country}})
     </button>
   </ion-list>

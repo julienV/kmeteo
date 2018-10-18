@@ -41,10 +41,11 @@ export class FavoritePage {
    * Go to details page
    * 
    * @param cityId 
+   * @param name
    */
-  addFavorite(cityId: number) {
+  addFavorite(cityId: number, name: string) {
     this.viewCtrl.dismiss();
-    this.appCtrl.getRootNav().push(CityDetailsPage, {cityId});
+    this.appCtrl.getRootNav().push(CityDetailsPage, {cityId: cityId, name: name});
   }
 
   /**
